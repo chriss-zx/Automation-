@@ -10,7 +10,7 @@ public class GoogleTest2 {
     WebDriver driver;
 
     @BeforeClass
-    public void setUp() {
+    public void setup() {
         driver = new ChromeDriver();
         driver.get("https://www.google.com");
     }
