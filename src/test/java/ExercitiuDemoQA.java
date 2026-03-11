@@ -16,15 +16,22 @@ public class ExercitiuDemoQA {
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box");
 
+        String fullNameValue = "Cristi";
+
         WebElement fullName = driver.findElement(By.id("userName"));
         WebElement email = driver.findElement(By.id("userEmail"));
         WebElement currentAdress = driver.findElement(By.id("currentAddress"));
         WebElement permanentAdress = driver.findElement(By.id("permanentAddress"));
 
         WebElement submit = driver.findElement(By.className("btn-primary"));
+        boolean submitDisplay = submit.isDisplayed();
+        boolean submitEnabled = submit.isEnabled();
+
+        Assert.assertTrue(submitDisplay, "Button is not displayed.");
+        Assert.assertTrue(submitEnabled, "Button is not enabled.");
 
 
-        fullName.sendKeys("Cristi");
+        fullName.sendKeys(fullNameValue);
         email.sendKeys("cristi@test.com");
         currentAdress.sendKeys("Timisoara");
         permanentAdress.sendKeys("Timisoara");
@@ -38,7 +45,13 @@ public class ExercitiuDemoQA {
 
         WebElement output = driver.findElement(By.id("output"));
 
-        Assert.assertTrue(output.isDisplayed());
+        // Assert.assertTrue(output.isDisplayed());
+
+        String outputName = driver.findElement(By.id("name")).getText();
+
+        System.out.println(outputName);
+
+        Assert.assertTrue(outputName.contains(fullNameValue));
     }
 
 
@@ -119,5 +132,58 @@ public class ExercitiuDemoQA {
 
         Assert.assertEquals(textHome, "Home", "Mesajul nu este corect.");
 
+    }
+
+
+    @Test
+    public void buton() {
+
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demoqa.com/buttons");
+
+        WebElement clickMe = driver.findElement(By.xpath("//button[text()='Click Me']"));
+        clickMe.click();
+
+        WebElement output = driver.findElement(By.id("dynamicClickMessage"));
+
+        boolean outputMsg = output.isDisplayed();
+
+        Assert.assertTrue(outputMsg, "Message is not displayed");
+
+        String dynamicClickMsg = output.getText();
+        Assert.assertEquals(dynamicClickMsg, "You have done a dynamic click", "Message is not correct.");
+
+    }
+
+
+    @Test
+    public void clearText() {
+
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demoqa.com/text-box");
+
+        WebElement fullName = driver.findElement(By.id("userName"));
+        fullName.sendKeys("Cristi");
+
+        WebElement email = driver.findElement(By.id("userEmail"));
+        email.sendKeys("cristi@test.com");
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        fullName.clear();
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        fullName.sendKeys("Test");
     }
 }
