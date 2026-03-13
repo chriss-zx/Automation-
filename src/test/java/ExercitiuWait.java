@@ -37,4 +37,5 @@ public class ExercitiuWait {
         Assert.assertTrue(isDisplayed, "Button is not visible after 5 seconds.");
     }
 
+
 }
