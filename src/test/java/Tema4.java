@@ -28,6 +28,7 @@ public class Tema4 {
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.get("https://practicesoftwaretesting.com/");
     }
 
 
@@ -48,7 +49,7 @@ public class Tema4 {
         String actualTitle = driver.getTitle();
         Assert.assertTrue(actualTitle.contains("Practice Software Testing - Toolshop"));
 
-        waitForElementVisible(By.xpath("(//*[@data-test='product-name'])[1]"));
+        waitForElementVisible(By.id("Layer_1"));
 
 //    Verifică dacă logo-ul aplicației este vizibil.
         boolean logo = driver.findElement(By.id("Layer_1")).isDisplayed();
@@ -59,7 +60,6 @@ public class Tema4 {
 //    2. Creează un test pentru căutarea unui produs
     @Test
     public void searchProduct() {
-        driver.get("https://practicesoftwaretesting.com/");
 
 //    Identifică search bar.
         WebElement search = waitForElementVisible(By.xpath("//input[@placeholder='Search']"));
@@ -81,9 +81,6 @@ public class Tema4 {
 
     @Test
     public void openProduct() {
-//    Deschide pagina principală.
-        driver.get("https://practicesoftwaretesting.com/");
-
 //    Așteaptă încărcarea produselor.
 //    Apasă pe primul produs din listă.
 
@@ -103,13 +100,10 @@ public class Tema4 {
 //    4. Creează un test pentru filtrarea produselor
     @Test
     public void filters() {
-//    Deschide pagina principală.
-        driver.get("https://practicesoftwaretesting.com/");
-
         waitForElementVisible(By.xpath("(//*[@data-test='product-name'])[1]"));
 
 //    Selectează un filtru (ex: brand sau categorie)
-        driver.findElement(By.xpath("//*[@data-test='category-01KKM946K85EBD1Q6MT4GMXTPN']")).click();
+        driver.findElement(By.xpath("//label[contains(text(), 'Power Tools')]")).click();
 
 //    Așteaptă actualizarea listei.
         waitForElementVisible(By.xpath("//*[@data-test='filter_completed']"));
