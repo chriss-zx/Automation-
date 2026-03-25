@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke Suite">
+
+    <test name="Exercitiu">
+        <groups>
+            <run>
+                <include name="smoke"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="Class1"/>
+            <class name="Class2"/>
+            <class name="Class3"/>
+        </classes>
+
+    </test>
+
+</suite>
