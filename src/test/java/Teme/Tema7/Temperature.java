@@ -25,7 +25,7 @@ public class Temperature {
     }
 
     public double toFahrenheit() {
-        return celsius * 9/5 + 32;
+        return celsius * 9.0/5.0 + 32;
     }
 
     public double toKelvin() {
